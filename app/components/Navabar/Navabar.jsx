@@ -133,7 +133,10 @@ export const Navbar = () => {
                       </div>
                       <div className="py-1">
                         <button
-                          onClick={() => { router.push("/products/new"); setDropdownOpen(false); }}
+                          onClick={() => { 
+                            router.push("/addproduct"); 
+                            setDropdownOpen(false);
+                           }}
                           className="flex w-full items-center gap-2 px-4 py-2.5 text-sm text-slate-600 hover:bg-sky-50 hover:text-sky-700 transition-colors"
                         >
                           <Plus className="h-4 w-4" /> Add Product
