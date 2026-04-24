@@ -125,13 +125,13 @@ export const Navbar = ({ user, signOut }) => {
               ) : (
                 <div className="flex items-center gap-2">
                   <button
-                    onClick={() => router.push("/auth")}
+                    onClick={() => router.push("/login")}
                     className="px-4 py-2 text-sm font-medium text-slate-600 rounded-full hover:bg-sky-100 hover:text-sky-600 transition-colors"
                   >
                     Log in
                   </button>
                   <button
-                    onClick={() => router.push("/auth?mode=signup")}
+                    onClick={() => router.push("/signup")}
                     className="px-4 py-2 text-sm font-medium text-white bg-sky-500 rounded-full hover:bg-sky-600 transition-colors"
                   >
                     Sign up
@@ -232,13 +232,13 @@ export const Navbar = ({ user, signOut }) => {
               ) : (
                 <div className="flex flex-col gap-2 mt-2">
                   <button
-                    onClick={() => { router.push("/auth"); closeMobile(); }}
+                    onClick={() => { router.push("/login"); closeMobile(); }}
                     className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl border border-sky-200 text-sm font-medium text-slate-600 hover:bg-sky-600 hover:text-white transition-colors"
                   >
                     <UserIcon className="h-4 w-4 " /> Log in
                   </button>
                   <button
-                    onClick={() => { router.push("/auth?mode=signup"); closeMobile(); }}
+                    onClick={() => { router.push("/signup"); closeMobile(); }}
                     className="flex items-center justify-center px-4 py-3 rounded-xl text-sm font-medium text-white bg-sky-500/40 hover:bg-sky-600 transition-colors"
                   >
                     Sign up
