@@ -3,6 +3,7 @@
 "use client";
 
 import { useState, useEffect, useCallback, useRef } from "react";
+import { Suspense } from "react";
 import { Search, SlidersHorizontal, PackageOpen, Loader2, X } from "lucide-react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { ProductCard } from "../components/ProductCard";
@@ -182,6 +183,14 @@ export default function ProductsPage() {
   );
 
   return (
+    <Suspense fallback={
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="flex flex-col items-center gap-3">
+          <div className="h-10 w-10 rounded-full border-4 border-sky-500 border-t-transparent animate-spin" />
+          <p className="text-slate-500 text-sm">Loading products...</p>
+        </div>
+      </div>
+    }>
     <div className="flex-1 bg-linear-to-br from-sky-50 via-white to-sky-100 min-h-screen">
       <div className="bg-white border-b border-sky-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
@@ -310,5 +319,6 @@ export default function ProductsPage() {
         </div>
       </div>
     </div>
+    </Suspense>
   );
 }
