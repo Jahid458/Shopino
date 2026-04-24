@@ -4,6 +4,7 @@ import { Navbar } from "./components/Navabar/Navabar";
 import { Footer } from "./components/Footer/Footer";
 import { AuthProvider } from "@/context/AuthContext";
 import { Toaster } from "react-hot-toast";
+import { Suspense } from "react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,7 +29,9 @@ export default function RootLayout({ children }) {
     >
       <body className="min-h-screen flex flex-col">
         <AuthProvider>
+          <Suspense fallback={<div>Loading...</div>}>
           <Navbar />
+          </Suspense>
           {children}
           <Footer />
           <Toaster position="top-center" />
