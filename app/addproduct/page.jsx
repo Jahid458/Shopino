@@ -1,28 +1,15 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
-import {
-  PackagePlus,
-  Loader2,
-  CheckCircle,
-  X,
-  Tag,
-  FileText,
-  AlignLeft,
-  DollarSign,
-  Calendar,
-  ImageIcon,
-  AlertCircle,
-} from "lucide-react";
+import { PackagePlus, Loader2, CheckCircle, X, Tag, AlignLeft, DollarSign, Calendar, ImageIcon ,AlertCircle} from "lucide-react";
 
 const categories = ["Fashion", "Electronics", "Home", "Lifestyle"];
 const priorities = ["Low", "Medium", "High"];
 
 const initialForm = {
   title: "",
-  shortDescription: "",
   fullDescription: "",
   price: "",
   category: "Fashion",
@@ -33,10 +20,8 @@ const initialForm = {
 
 export default function AddProductPage() {
   const { user } = useAuth();
-  const router = useRouter();
   const [form, setForm] = useState(initialForm);
   const [loading, setLoading] = useState(false);
-  const [showModal, setShowModal] = useState(false);
   const [toast, setToast] = useState({ show: false, message: "", type: "" });
   const [error, setError] = useState("");
 
@@ -54,7 +39,8 @@ export default function AddProductPage() {
     e.preventDefault();
     setError("");
 
-    if (!form.title.trim()) { setError("Title is required."); return; }
+    if (!form.title.trim()) { setError("Title is required."); return}
+    
     if (!form.price || isNaN(form.price) || Number(form.price) <= 0) {
       setError("Please enter a valid price.");
       return;
@@ -74,7 +60,8 @@ export default function AddProductPage() {
 
       if (!res.ok) throw new Error("Failed to add product.");
 
-      setShowModal(true);
+      setForm(initialForm);
+      showToast("Product added successfully! 🎉", "success");
     } catch (err) {
       showToast(err.message || "Something went wrong.", "error");
     } finally {
@@ -82,73 +69,18 @@ export default function AddProductPage() {
     }
   };
 
-  const handleModalConfirm = () => {
-    setShowModal(false);
-    setForm(initialForm);
-    showToast("Product published successfully! 🎉", "success");
-    setTimeout(() => router.push("/products"), 1500);
-  };
-
-  const handleModalClose = () => {
-    setShowModal(false);
-    setForm(initialForm);
-    showToast("Product published successfully! 🎉", "success");
-  };
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-sky-50 via-white to-sky-100 py-10 px-4 sm:px-6">
+    <div className="flex-1 bg-linear-to-br from-sky-50 via-white to-sky-100 py-10 px-4 sm:px-6">
 
       {toast.show && (
-        <div className={`fixed top-5 left-1/2 -translate-x-1/2 z-[200] flex items-center gap-3 px-5 py-3.5 rounded-2xl shadow-lg text-sm font-medium transition-all duration-300 ${
-          toast.type === "success"
-            ? "bg-green-500 text-white"
-            : "bg-red-500 text-white"
+        <div className={`fixed top-5 left-1/2 -translate-x-1/2 z-200 flex items-center gap-3 px-5 py-3.5 rounded-2xl shadow-lg text-sm font-medium transition-all duration-300 ${
+          toast.type === "success" ? "bg-green-500 text-white" : "bg-red-500 text-white"
         }`}>
           {toast.type === "success"
             ? <CheckCircle className="h-4 w-4 shrink-0" />
             : <AlertCircle className="h-4 w-4 shrink-0" />
           }
           {toast.message}
-        </div>
-      )}
-
-      {showModal && (
-        <div className="fixed inset-0 z-[150] flex items-center justify-center px-4">
-          <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={handleModalClose} />
-          <div className="relative bg-white rounded-2xl shadow-2xl border border-sky-100 p-6 sm:p-8 w-full max-w-sm mx-auto text-center">
-            <button
-              onClick={handleModalClose}
-              className="absolute top-4 right-4 p-1.5 rounded-full text-slate-400 hover:bg-slate-100 transition-colors"
-            >
-              <X className="h-4 w-4" />
-            </button>
-
-            <div className="flex items-center justify-center mb-4">
-              <div className="h-16 w-16 rounded-full bg-green-100 flex items-center justify-center">
-                <CheckCircle className="h-8 w-8 text-green-500" />
-              </div>
-            </div>
-
-            <h2 className="text-xl font-bold text-slate-800 mb-1">Product Added!</h2>
-            <p className="text-slate-500 text-sm mb-6">
-              Your product has been published to the marketplace successfully.
-            </p>
-
-            <div className="flex flex-col sm:flex-row gap-3">
-              <button
-                onClick={handleModalClose}
-                className="flex-1 py-2.5 rounded-xl border border-slate-200 text-sm font-semibold text-slate-600 hover:bg-slate-50 transition-colors"
-              >
-                Add Another
-              </button>
-              <button
-                onClick={handleModalConfirm}
-                className="flex-1 py-2.5 rounded-xl bg-sky-500 hover:bg-sky-600 text-white text-sm font-semibold transition-colors"
-              >
-                View Products
-              </button>
-            </div>
-          </div>
         </div>
       )}
 
@@ -189,23 +121,6 @@ export default function AddProductPage() {
                   placeholder="e.g. Wireless Headphones"
                   required
                   className="w-full pl-10 pr-4 py-2.5 sm:py-3 rounded-xl border border-slate-200 bg-slate-50 text-slate-800 text-sm placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-sky-400 focus:border-transparent transition"
-                />
-              </div>
-            </div>
-
-            <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1.5">
-                Short Description <span className="text-red-400">*</span>
-              </label>
-              <div className="relative">
-                <FileText className="absolute left-3 top-3 h-4 w-4 text-slate-400 pointer-events-none" />
-                <textarea
-                  value={form.shortDescription}
-                  onChange={(e) => update("shortDescription", e.target.value)}
-                  placeholder="Brief one-liner about the product"
-                  required
-                  rows={2}
-                  className="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-slate-800 text-sm placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-sky-400 focus:border-transparent transition resize-none"
                 />
               </div>
             </div>
@@ -272,8 +187,8 @@ export default function AddProductPage() {
                   onChange={(e) => update("category", e.target.value)}
                   className="w-full px-4 py-2.5 sm:py-3 rounded-xl border border-slate-200 bg-slate-50 text-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-sky-400 focus:border-transparent transition cursor-pointer"
                 >
-                  {categories.map((c) => (
-                    <option key={c} value={c}>{c}</option>
+                  {categories.map((cate) => (
+                    <option key={cate} value={cate}>{cate}</option>
                   ))}
                 </select>
               </div>
@@ -329,11 +244,8 @@ export default function AddProductPage() {
                 )}
               </div>
               {form.imageUrl && (
-                <div className="mt-3 rounded-xl overflow-hidden border border-sky-100 h-40">
-                  <img
-                    src={form.imageUrl}
-                    alt="Preview"
-                    className="w-full h-full object-cover"
+                <div className="mt-3 rounded-2xl overflow-hidden border border-sky-100 h-20 w-24">
+                  <img src={form.imageUrl}  alt="Preview" className="w-full h-full object-cover"
                     onError={(e) => { e.target.style.display = "none"; }}
                   />
                 </div>
