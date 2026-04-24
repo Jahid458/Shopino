@@ -1,7 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
-import { useState } from "react";
+import { useState , useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
 import { PackagePlus, Loader2, CheckCircle, X, Tag, AlignLeft, DollarSign, Calendar, ImageIcon ,AlertCircle} from "lucide-react";
 
@@ -19,11 +20,20 @@ const initialForm = {
 };
 
 export default function AddProductPage() {
-  const { user } = useAuth();
+  const { user , loading } = useAuth();
   const [form, setForm] = useState(initialForm);
-  const [loading, setLoading] = useState(false);
+  const [loading2, setLoading] = useState(false);
   const [toast, setToast] = useState({ show: false, message: "", type: "" });
   const [error, setError] = useState("");
+
+
+    useEffect(() => {
+    if (!loading && !user) {
+      router.push("/login");
+    }
+  }, [user, loading]);
+
+  if (loading || !user) return null;
 
   const update = (key, value) => {
     setForm((prev) => ({ ...prev, [key]: value }));
@@ -255,10 +265,10 @@ export default function AddProductPage() {
             <div className="pt-2">
               <button
                 type="submit"
-                disabled={loading}
+                disabled={loading2}
                 className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-sky-500 hover:bg-sky-600 active:bg-sky-700 text-white text-sm font-semibold transition-colors disabled:opacity-60"
               >
-                {loading ? (
+                {loading2 ? (
                   <>
                     <Loader2 className="h-4 w-4 animate-spin" />
                     Publishing...
