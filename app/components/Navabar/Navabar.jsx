@@ -93,9 +93,7 @@ export const Navbar = () => {
                   key={link.href}
                   href={link.href}
                   className={`px-4 py-2 rounded-full text-sm font-medium transition-colors duration-200 ${
-                    isActive(link.href)
-                      ? "text-sky-600 bg-sky-100"
-                      : "text-slate-600 hover:text-sky-600 hover:bg-sky-100"
+                    isActive(link.href) ? "text-sky-600 bg-sky-100" : "text-slate-600 hover:text-sky-600 hover:bg-sky-100"
                   }`}
                 >
                   {link.label}
