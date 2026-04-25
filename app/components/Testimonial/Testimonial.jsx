@@ -1,9 +1,24 @@
 "use client";
 
 const testimonials = [
-  { name: "Maya R.",   role: "Designer, Berlin",      text: "The vibe is unmatched. Every order feels like a treat.",          avatar: "MR" },
-  { name: "Daniel K.", role: "Founder, Austin",        text: "Curated, fast, and beautifully packaged. My new go-to.",          avatar: "DK" },
-  { name: "Aiko S.",   role: "Photographer, Tokyo",    text: "Vivid genuinely lives up to its name. Pure joy.",                 avatar: "AS" },
+  {
+    name: "Maya R.",
+    role: "Designer, Berlin",
+    text: "The vibe is unmatched. Every order feels like a treat.",
+    avatar: "MR",
+  },
+  {
+    name: "Daniel K.",
+    role: "Founder, Austin",
+    text: "Curated, fast, and beautifully packaged. My new go-to.",
+    avatar: "DK",
+  },
+  {
+    name: "Aiko S.",
+    role: "Photographer, Tokyo",
+    text: "Shopino genuinely lives up to its name. Pure joy.",
+    avatar: "AS",
+  },
 ];
 
 const avatarColors = ["#0EA5E9", "#0284c7", "#0369a1"];
@@ -44,18 +59,6 @@ export default function Testimonial() {
           position: relative;
           overflow: hidden;
         }
-        .testimonial-card::before {
-          content: '"';
-          position: absolute;
-          top: -10px;
-          right: 20px;
-          font-family: Georgia, serif;
-          font-size: 8rem;
-          color: #e0f2fe;
-          line-height: 1;
-          pointer-events: none;
-          user-select: none;
-        }
         .testimonial-card:hover {
           transform: translateY(-6px);
           box-shadow: 0 16px 40px rgba(14,165,233,0.13);
@@ -64,85 +67,114 @@ export default function Testimonial() {
 
       <section style={{ background: "#e0f2fe", padding: "5rem 5%" }}>
         <div style={{ maxWidth: "1200px", margin: "0 auto" }}>
-
           {/* heading */}
           <div style={{ textAlign: "center", marginBottom: "3rem" }}>
-            <span style={{
-              display: "inline-block",
-              background: "#0EA5E9",
-              color: "#fff",
-              fontSize: "0.72rem",
-              fontWeight: 700,
-              letterSpacing: "0.1em",
-              textTransform: "uppercase",
-              borderRadius: "50px",
-              padding: "0.3rem 1rem",
-              marginBottom: "0.9rem",
-              fontFamily: "DM Sans, sans-serif",
-            }}>Reviews</span>
-            <h2 style={{
-              fontFamily: "Playfair Display, serif",
-              fontSize: "clamp(1.8rem, 3.5vw, 2.6rem)",
-              fontWeight: 800,
-              color: "#0c4a6e",
-              marginBottom: "0.5rem",
-            }}>Loved everywhere</h2>
-            <p style={{
-              fontFamily: "DM Sans, sans-serif",
-              color: "#0369a1",
-              fontSize: "0.95rem",
-            }}>Honest words from our community.</p>
+            <span
+              style={{
+                display: "inline-block",
+                background: "#0EA5E9",
+                color: "#fff",
+                fontSize: "0.72rem",
+                fontWeight: 700,
+                letterSpacing: "0.1em",
+                textTransform: "uppercase",
+                borderRadius: "50px",
+                padding: "0.3rem 1rem",
+                marginBottom: "0.9rem",
+                fontFamily: "DM Sans, sans-serif",
+              }}
+            >
+              Reviews
+            </span>
+            <h2
+              style={{
+                fontFamily: "Playfair Display, serif",
+                fontSize: "clamp(1.8rem, 3.5vw, 2.6rem)",
+                fontWeight: 800,
+                color: "#0c4a6e",
+                marginBottom: "0.5rem",
+              }}
+            >
+              Loved everywhere
+            </h2>
+            <p
+              style={{
+                fontFamily: "DM Sans, sans-serif",
+                color: "#0369a1",
+                fontSize: "0.95rem",
+              }}
+            >
+              Honest words from our community.
+            </p>
           </div>
 
           <div className="testimonials-grid">
             {testimonials.map(({ name, role, text, avatar }, i) => (
               <div key={name} className="testimonial-card">
-
                 <div style={{ display: "flex", gap: "3px" }}>
-                  {[...Array(5)].map((_, j) => <StarIcon key={j} />)}
+                  {[...Array(5)].map((_, j) => (
+                    <StarIcon key={j} />
+                  ))}
                 </div>
 
-             
-                <p style={{
-                  fontFamily: "DM Sans, sans-serif",
-                  fontSize: "0.95rem",
-                  color: "#0c4a6e",
-                  lineHeight: 1.7,
-                  fontStyle: "italic",
-                  flex: 1,
-                  position: "relative",
-                  zIndex: 1,
-                }}>{text}</p>
-
-                <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-                  <div style={{
-                    width: "42px",
-                    height: "42px",
-                    borderRadius: "50%",
-                    background: avatarColors[i],
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
+                <p
+                  style={{
                     fontFamily: "DM Sans, sans-serif",
-                    fontWeight: 700,
-                    fontSize: "0.78rem",
-                    color: "#fff",
-                    flexShrink: 0,
-                  }}>{avatar}</div>
-                  <div>
-                    <p style={{
+                    fontSize: "0.95rem",
+                    color: "#0c4a6e",
+                    lineHeight: 1.7,
+                    fontStyle: "italic",
+                    flex: 1,
+                    position: "relative",
+                    zIndex: 1,
+                  }}
+                >
+                  {text}
+                </p>
+
+                <div
+                  style={{ display: "flex", alignItems: "center", gap: "12px" }}
+                >
+                  <div
+                    style={{
+                      width: "42px",
+                      height: "42px",
+                      borderRadius: "50%",
+                      background: avatarColors[i],
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
                       fontFamily: "DM Sans, sans-serif",
                       fontWeight: 700,
-                      fontSize: "0.9rem",
-                      color: "#0c4a6e",
-                      margin: 0,
-                    }}>{name}</p>
-                    <p style={{
-                      fontFamily: "DM Sans, sans-serif",
                       fontSize: "0.78rem",
-                      color: "#0369a1",
-                      margin: 0,
-                    }}>{role}</p>
+                      color: "#fff",
+                      flexShrink: 0,
+                    }}
+                  >
+                    {avatar}
+                  </div>
+                  <div>
+                    <p
+                      style={{
+                        fontFamily: "DM Sans, sans-serif",
+                        fontWeight: 700,
+                        fontSize: "0.9rem",
+                        color: "#0c4a6e",
+                        margin: 0,
+                      }}
+                    >
+                      {name}
+                    </p>
+                    <p
+                      style={{
+                        fontFamily: "DM Sans, sans-serif",
+                        fontSize: "0.78rem",
+                        color: "#0369a1",
+                        margin: 0,
+                      }}
+                    >
+                      {role}
+                    </p>
                   </div>
                 </div>
               </div>
