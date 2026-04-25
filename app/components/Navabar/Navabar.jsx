@@ -7,13 +7,13 @@ import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import { ShoppingBag, Plus, Settings, LogOut, User as UserIcon, Menu, X, ChevronDown } from "lucide-react";
 import { useAuth } from "@/context/AuthContext";
 
-const navLinks = [
-  { href: "/", label: "Home" },
-  { href: "/products", label: "Product" },
-  { href: "/about", label: "About" },
-  { href: "/items?category=Fashion", label: "Fashion" },
-  { href: "/items?category=Electronics", label: "Tech" },
-];
+  const navLinks = [
+    { href: "/", label: "Home" },
+    { href: "/products", label: "Product" },
+    { href: "/about", label: "About" },
+    { href: "/products?category=Fashion", label: "Fashion" },
+    { href: "/products?category=Electronics", label: "Tech" },
+  ];
 
 export const Navbar = () => {
   const { user, logout } = useAuth();
