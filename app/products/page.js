@@ -2,9 +2,14 @@
 /* eslint-disable react-hooks/set-state-in-effect */
 "use client";
 
-import { useState, useEffect, useCallback, useRef } from "react";
-import { Suspense } from "react";
-import { Search, SlidersHorizontal, PackageOpen, Loader2, X } from "lucide-react";
+import { useState, useEffect, useCallback, useRef, Suspense  } from "react";
+import {
+  Search,
+  SlidersHorizontal,
+  PackageOpen,
+  Loader2,
+  X,
+} from "lucide-react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { ProductCard } from "../components/ProductCard";
 
@@ -19,7 +24,7 @@ const sortOptions = [
 
 const MAX_PRICE = 1200;
 
-export default function ProductsPage() {
+ function ProductsContentList() {
   const searchParams = useSearchParams();
   const router = useRouter();
 
@@ -28,11 +33,17 @@ export default function ProductsPage() {
   const [total, setTotal] = useState(0);
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
-  const [searchInput, setSearchInput] = useState(searchParams.get("search") || "");
+  const [searchInput, setSearchInput] = useState(
+    searchParams.get("search") || "",
+  );
   const [search, setSearch] = useState(searchParams.get("search") || "");
-  const [category, setCategory] = useState(searchParams.get("category") || "all");
+  const [category, setCategory] = useState(
+    searchParams.get("category") || "all",
+  );
   const [sort, setSort] = useState(searchParams.get("sort") || "newest");
-  const [maxPrice, setMaxPrice] = useState(Number(searchParams.get("maxPrice")) || MAX_PRICE);
+  const [maxPrice, setMaxPrice] = useState(
+    Number(searchParams.get("maxPrice")) || MAX_PRICE,
+  );
 
   const debounceRef = useRef(null);
   const handleSearchInput = (val) => {
@@ -92,14 +103,14 @@ export default function ProductsPage() {
     setSort("newest");
   };
 
-  const isFiltered = search || category !== "all" 
-             || sort !== "newest" || maxPrice < MAX_PRICE;
+  const isFiltered = search || category !== "all" || sort !== "newest" || maxPrice < MAX_PRICE;
 
- 
   const renderFilters = () => (
     <div className="space-y-6">
       <div>
-        <label className="block text-sm font-semibold text-slate-700 mb-2">Search</label>
+        <label className="block text-sm font-semibold text-slate-700 mb-2">
+          Search
+        </label>
         <div className="relative">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400 pointer-events-none" />
           <input
@@ -109,19 +120,24 @@ export default function ProductsPage() {
             placeholder="Search products..."
             className="w-full pl-9 pr-9 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-slate-800 text-sm placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-sky-400 focus:border-transparent transition"
           />
-          {searchInput && <button
+          {searchInput && (
+            <button
               type="button"
               onClick={clearSearch}
               className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
-            ><X className="h-4 w-4" /></button>
-          }
+            >
+              <X className="h-4 w-4" />
+            </button>
+          )}
         </div>
       </div>
 
-      
-      <div><label className="block text-sm font-semibold text-slate-700 mb-2">Category</label>
+      <div>
+        <label className="block text-sm font-semibold text-slate-700 mb-2">
+          Category
+        </label>
         <div className="flex flex-wrap gap-2">
-          {categories.map((c) => 
+          {categories.map((c) => (
             <button
               key={c}
               onClick={() => setCategory(c)}
@@ -133,19 +149,22 @@ export default function ProductsPage() {
             >
               {c === "all" ? "All" : c}
             </button>
-          )}
+          ))}
         </div>
       </div>
 
-        <div>
+      <div>
         <label className="block text-sm font-semibold text-slate-700 mb-1">
           Max Price
           <span className="font-normal text-sky-600">
             {maxPrice >= MAX_PRICE ? ` ${MAX_PRICE}+` : ` ${maxPrice}`}
           </span>
         </label>
-        <p className="text-xs text-slate-400 mb-3">$0 — ${maxPrice >= MAX_PRICE ? `${MAX_PRICE}+` : maxPrice}</p>
-        <input type="range"
+        <p className="text-xs text-slate-400 mb-3">
+          $0 — ${maxPrice >= MAX_PRICE ? `${MAX_PRICE}+` : maxPrice}
+        </p>
+        <input
+          type="range"
           min={0}
           max={MAX_PRICE}
           step={10}
@@ -159,38 +178,35 @@ export default function ProductsPage() {
         </div>
       </div>
 
-    
       <div>
-        <label className="block text-sm font-semibold text-slate-700 mb-2">Sort By</label>
+        <label className="block text-sm font-semibold text-slate-700 mb-2">
+          Sort By
+        </label>
         <select
           value={sort}
           onChange={(e) => setSort(e.target.value)}
           className="w-full px-3 py-2.5 rounded-xl border border-slate-200 bg-slate-50 text-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-sky-400 focus:border-transparent transition cursor-pointer"
         >
           {sortOptions.map((o) => (
-            <option key={o.value} value={o.value}>{o.label}</option>
+            <option key={o.value} value={o.value}>
+              {o.label}
+            </option>
           ))}
         </select>
       </div>
 
-  
-      {isFiltered &&  <button
+      {isFiltered && (
+        <button
           onClick={clearFilters}
           className="w-full py-2.5 rounded-xl border border-red-200 text-red-500 text-sm font-medium hover:bg-red-50 transition-colors"
-        >Clear All Filters</button>
-      }
+        >
+          Clear All Filters
+        </button>
+      )}
     </div>
   );
 
   return (
-    <Suspense fallback={
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="flex flex-col items-center gap-3">
-          <div className="h-10 w-10 rounded-full border-4 border-sky-500 border-t-transparent animate-spin" />
-          <p className="text-slate-500 text-sm">Loading products...</p>
-        </div>
-      </div>
-    }>
     <div className="flex-1 bg-linear-to-br from-sky-50 via-white to-sky-100 min-h-screen">
       <div className="bg-white border-b border-sky-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-10">
@@ -210,7 +226,8 @@ export default function ProductsPage() {
               <div className="flex items-center gap-2 mb-5">
                 <SlidersHorizontal className="h-4 w-4 text-sky-500" />
                 <h2 className="font-bold text-slate-800">Filters</h2>
-              </div>{renderFilters()}
+              </div>
+              {renderFilters()}
             </div>
           </aside>
 
@@ -222,15 +239,19 @@ export default function ProductsPage() {
               <SlidersHorizontal className="h-4 w-4" />
               Filters
               {isFiltered && (
-                <span className="bg-white text-sky-500 rounded-full text-xs px-1.5 font-bold">•</span>
+                <span className="bg-white text-sky-500 rounded-full text-xs px-1.5 font-bold">
+                  •
+                </span>
               )}
             </button>
           </div>
 
-          
           {sidebarOpen && (
             <div className="lg:hidden fixed inset-0 z-50">
-              <div className="absolute inset-0 bg-black/50" onClick={() => setSidebarOpen(false)} />
+              <div
+                className="absolute inset-0 bg-black/50"
+                onClick={() => setSidebarOpen(false)}
+              />
               <div className="absolute right-0 top-0 h-full w-80 bg-white shadow-2xl flex flex-col">
                 <div className="flex items-center justify-between px-5 py-4 border-b border-sky-100">
                   <div className="flex items-center gap-2">
@@ -259,30 +280,38 @@ export default function ProductsPage() {
             </div>
           )}
 
-    
           <div className="flex-1 min-w-0">
             <div className="flex items-center justify-between mb-5 flex-wrap gap-2">
               <p className="text-sm text-slate-500">
-                Showing <span className="font-semibold text-slate-800">{total}</span> products
+                Showing
+                <span className="font-semibold text-slate-800">{total}</span>
+                products
               </p>
               <div className="flex flex-wrap gap-2">
-                {category !== "all" && <span className="flex items-center gap-1 px-3 py-1 rounded-full bg-sky-100 text-sky-700 text-xs font-medium">
+                {category !== "all" && (
+                  <span className="flex items-center gap-1 px-3 py-1 rounded-full bg-sky-100 text-sky-700 text-xs font-medium">
                     {category}
-                    <button onClick={() => setCategory("all")}><X className="h-3 w-3" /></button>
+                    <button onClick={() => setCategory("all")}>
+                      <X className="h-3 w-3" />
+                    </button>
                   </span>
-                }
-                {search && 
+                )}
+                {search && (
                   <span className="flex items-center gap-1 px-3 py-1 rounded-full bg-sky-100 text-sky-700 text-xs font-medium">
                     &ldquo;{search}&rdquo;
-                    <button onClick={clearSearch}><X className="h-3 w-3" /></button>
+                    <button onClick={clearSearch}>
+                      <X className="h-3 w-3" />
+                    </button>
                   </span>
-                }
-                {maxPrice < MAX_PRICE &&
+                )}
+                {maxPrice < MAX_PRICE && (
                   <span className="flex items-center gap-1 px-3 py-1 rounded-full bg-sky-100 text-sky-700 text-xs font-medium">
                     Up to ${maxPrice}
-                    <button onClick={() => setMaxPrice(MAX_PRICE)}><X className="h-3 w-3" /></button>
+                    <button onClick={() => setMaxPrice(MAX_PRICE)}>
+                      <X className="h-3 w-3" />
+                    </button>
                   </span>
-                }
+                )}
               </div>
             </div>
 
@@ -292,33 +321,51 @@ export default function ProductsPage() {
               </div>
             )}
 
-    
             {!loading && products.length === 0 && (
               <div className="flex flex-col items-center justify-center py-24 text-center">
                 <div className="h-16 w-16 rounded-full bg-sky-100 flex items-center justify-center mb-4">
                   <PackageOpen className="h-8 w-8 text-sky-400" />
                 </div>
-                <h3 className="text-lg font-bold text-slate-700 mb-1">No products found</h3>
-                <p className="text-slate-400 text-sm mb-4">Try adjusting your filters or search term.</p>
+                <h3 className="text-lg font-bold text-slate-700 mb-1">
+                  No products found
+                </h3>
+                <p className="text-slate-400 text-sm mb-4">
+                  Try adjusting your filters or search term.
+                </p>
 
-                {isFiltered && (
-                  <button
+                {isFiltered && <button
                     onClick={clearFilters}
                     className="px-5 py-2.5 rounded-full bg-sky-500 text-white text-sm font-medium hover:bg-sky-600 transition-colors"
                   >Clear Filters</button>
-                )}
+                }
               </div>
             )}
 
-            {!loading && products.length > 0 && (
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
-                {products.map((product) => <ProductCard key={product._id} product={product} />)}
+            {!loading && products.length > 0 && <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
+                {products.map((product) => (
+                  <ProductCard key={product._id} product={product} />
+                ))}
               </div>
-            )}
+            }
           </div>
         </div>
       </div>
     </div>
+  );
+}
+
+
+export default function ProductsPage() {
+  return (
+    <Suspense fallback={
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="flex flex-col items-center gap-3">
+          <div className="h-20 w-20 rounded-full border-4 border-sky-500 animate-spin" />
+          <p className="text-slate-500 text-sm">Loading Products ......</p>
+        </div>
+      </div>
+    }>
+      <ProductsContentList />
     </Suspense>
   );
 }
