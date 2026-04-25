@@ -64,20 +64,18 @@ export default function Hero() {
                 alignItems: "center",
                 gap: "6px",
                 background: "rgba(255,255,255,0.15)",
-                border: "1px solid rgba(255,255,255,0.3)",
+                border: "1px solid #0EA5E9",
                 borderRadius: "50px",
                 padding: "0.38rem 1.1rem",
                 fontSize: "0.75rem",
                 fontFamily: "'DM Sans', sans-serif",
                 fontWeight: 600,
-                color: "#fff",
+                color: "#41C6E0",
                 letterSpacing: "0.06em",
                 textTransform: "uppercase",
                 marginBottom: "1.6rem",
               }}>
-                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.2">
-                  <path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17l-6.2 4.3 2.4-7.4L2 9.4h7.6z"/>
-                </svg>
+               
                 New Season Drop
               </span>
 
@@ -147,14 +145,14 @@ export default function Hero() {
                     alignItems: "center",
                     gap: "8px",
                     background: "transparent",
-                    color: "#fff",
+                    color: "#0EA5E9",
                     borderRadius: "50px",
                     padding: "0.85rem 2.1rem",
                     fontFamily: "'DM Sans', sans-serif",
                     fontWeight: 600,
                     fontSize: "1rem",
                     textDecoration: "none",
-                    border: "1.5px solid rgba(255,255,255,0.5)",
+                    border: "1.5px solid #0EA5E9",
                     cursor: "pointer",
                     transition: "border-color 0.2s",
                   }}
