@@ -263,21 +263,15 @@ function ProductDetailContent() {
                 </div>
               </div>
 
-              <div className="flex gap-3 pt-2">
-                <button className="flex-1 flex items-center justify-center gap-2 py-3 rounded-xl bg-sky-500 hover:bg-sky-600 text-white text-sm font-semibold transition-colors">
-                  <ShoppingBag className="h-4 w-4" /> Add to Bag
+             
+                <button 
+                onClick={() => router.push('/products')} 
+                className="items-center justify-center gap-2 py-2  rounded-xl bg-sky-500 hover:bg-sky-600 text-white text-sm font-semibold ">
+                   Back
                 </button>
-                <button
-                  onClick={() => setWished(!wished)}
-                  className={`flex items-center justify-center h-12 w-12 rounded-xl border transition-colors ${
-                    wished
-                      ? "bg-red-50 border-red-200 text-red-500"
-                      : "border-slate-200 text-slate-400 hover:border-sky-300 hover:text-sky-500"
-                  }`}
-                >
-                  <Heart className={`h-5 w-5 ${wished ? "fill-red-500 text-red-500" : ""}`} />
-                </button>
-              </div>
+
+                
+          
 
             </div>
           </div>

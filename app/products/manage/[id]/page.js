@@ -328,7 +328,7 @@ function ProductDetailContent() {
                     <User className="h-4 w-4 text-sky-400 shrink-0 mt-0.5" />
                     <div>
                       <p className="text-xs text-slate-400">Listed by</p>
-                      <p className="text-sm font-semibold text-slate-700 truncate max-w-32">
+                      <p className="text-sm font-semibold text-slate-700 truncate max-w-[8rem]">
                         {product.createdBy}
                       </p>
                     </div>
