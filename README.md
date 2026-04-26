@@ -1,36 +1,145 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+#  Shopino — Shopping Marketplace
 
-## Getting Started
+Shopino is a shopping marketplace built for people who believe everyday objects should bring joy. We curate bold, beautiful products from independent makers and trusted brands — all in one playful place.
 
-First, run the development server:
+---
+
+##  Live Demo
+
+- **Live Site:** [https://shopino.vercel.app](https://shopino.vercel.app)
+- **GitHub Repo:** [https://github.com/Jahid458/Shopino](https://github.com/Jahid458/Shopino)
+
+---
+
+##  Key Features
+
+-  **Firebase Authentication** — Email/password login & register, Google OAuth sign-in
+-  **Protected Routes** — Add & Manage Products pages accessible only when logged in
+-  **Product Listing** — Browse 6+ products in a responsive grid layout
+-  **Search & Filter** — Filter products by category, price, rating, and more
+-  **Product Detail Page** — Dynamic route with full product info and related items
+-  **Add Product** — Form with title, description, price, image URL, and toast feedback
+-  **Manage Products** — Table/grid view with View and Delete actions
+-  **User Dropdown Navbar** — Shows logged-in user info with Add/Manage shortcuts
+
+
+---
+
+## 🛠️ Setup & Installation
+
+### Prerequisites
+
+- Node.js v18+
+- npm or yarn
+- A Firebase project (for authentication)
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/Jahid458/Shopino.git
+cd Shopino
+```
+
+### 2. Install Dependencies
+
+```bash
+npm install
+# or
+yarn install
+```
+
+### 3. Configure Firebase
+
+Create a `.env.local` file in the root directory and add your Firebase credentials:
+
+```env
+NEXT_PUBLIC_FIREBASE_API_KEY=your_api_key
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your_project.firebaseapp.com
+NEXT_PUBLIC_FIREBASE_PROJECT_ID=your_project_id
+NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=your_project.appspot.com
+NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
+NEXT_PUBLIC_FIREBASE_APP_ID=your_app_id
+```
+
+> You can find these values in your Firebase Console under **Project Settings → General → Your Apps**.
+
+### 4. Run the Development Server
 
 ```bash
 npm run dev
 # or
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+### 5. Build for Production
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+npm start
+```
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🧱 Tech Stack
 
-## Deploy on Vercel
+| Technology | Usage |
+|------------|-------|
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+| [Next.js 14] | App Router, SSR, dynamic routes |
+| [Firebase](https://firebase.google.com/) |
+| [Tailwind CSS](https://tailwindcss.com/) |
+| Styling and responsive design |
+| [React Context API](https://react.dev/) | 
+| [Vercel](https://vercel.com/) | Deployment and hosting |
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+
+## 📂 Project Structure
+
+```
+shopino/
+├── app/
+│   ├── page.jsx              # Landing page (/)
+│   ├── about/
+│   │   └── page.jsx          # About page (/about)
+│   ├── login/
+│   │   └── page.jsx          # Login page (/login)
+│   ├── register/
+│   │   └── page.jsx          # Register page (/register)
+│   └── products/
+│       ├── page.jsx          # Products listing (/products)
+│       ├── add/
+│       │   └── page.jsx      # Add product — protected (/products/add)
+│       ├── manage/
+│       │   └── page.jsx      # Manage products — protected (/products/manage)
+│       └── [id]/
+│           └── page.jsx      # Product detail (/products/[id])
+├── components/               # Reusable UI components (Navbar, Footer, Cards, etc.)
+├── context/
+│   └── AuthContext.jsx       # Firebase auth state provider
+├── firebase/
+│   └── firebase.config.js    # Firebase initialization
+├── public/                   # Static assets
+├── .env.local                # Environment variables (not committed)
+└── README.md
+```
+
+---
+
+## 🔒 Authentication Flow
+
+1. User registers or logs in via `/login`
+2. Firebase returns a user object stored in `AuthContext`
+3. Protected pages check auth state — unauthenticated users are redirected to `/login`
+4. After login, users are redirected to the homepage `/`
+5. Navbar updates to show user info dropdown with Add Product and Manage Products links
+
+
+
+
+
