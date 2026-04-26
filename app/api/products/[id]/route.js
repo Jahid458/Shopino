@@ -7,7 +7,6 @@ export async function GET(request, context) {
     await connectDB();
 
     const { id } = await context.params;
-
     const product = await Product.findById(id).lean();
 
     if (!product) {
@@ -18,11 +17,10 @@ export async function GET(request, context) {
     }
 
     return NextResponse.json({ success: true, product });
-
   } catch (error) {
     return NextResponse.json(
       { success: false, message: error.message },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
@@ -38,16 +36,15 @@ export async function DELETE(request, context) {
     if (!product) {
       return NextResponse.json(
         { success: false, message: "Product not found" },
-        { status: 404 }
+        { status: 404 },
       );
     }
 
     return NextResponse.json({ success: true, message: "Product deleted" });
-
   } catch (error) {
     return NextResponse.json(
       { success: false, message: error.message },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
