@@ -329,8 +329,8 @@ function ManageItemsContent() {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="flex flex-col sm:flex-row sm:items-center gap-3 mb-6">
+      <div className="max-w-7xl  mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="flex flex-col justify-between  sm:flex-row sm:items-center gap-3 mb-6">
        
           <div className="relative flex-1 max-w-md">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400 pointer-events-none" />
@@ -350,7 +350,7 @@ function ManageItemsContent() {
           </div>
 
        
-          <div className="flex items-center gap-1 bg-white rounded-xl border border-sky-100 p-1 shadow-sm self-start sm:self-auto">
+          <div className="flex  items-center gap-1 bg-white rounded-xl border border-sky-100 p-1 shadow-sm self-start sm:self-auto">
             <button
               onClick={() => setView("grid")}
               className={`flex items-center gap-1.5 px-3 py-2 rounded-lg text-xs font-semibold transition-all ${
