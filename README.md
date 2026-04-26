@@ -1,4 +1,4 @@
-#  Shopino — Shopping Marketplace
+#  Shopino  Shopping Marketplace
 
 Shopino is a shopping marketplace built for people who believe everyday objects should bring joy. We curate bold, beautiful products from independent makers and trusted brands — all in one playful place.
 
