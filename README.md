@@ -83,8 +83,6 @@ npm start
 ---
 
 
----
-
 ## 🧱 Tech Stack
 
 | Technology | Usage |
